@@ -9,9 +9,9 @@ export default function Dashboard() {
   };
   return (
     <>
-      <TitleBar />
+      {/* <TitleBar />
       <SideBar />
-      <Feed />
+      <Feed /> */}
     </>
   );
 
