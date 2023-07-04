@@ -1,5 +1,9 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import Feed from "../components/Feed.js";
+import Sidebar from "../components/SideBar.js"
+import TitleBar from "../components/TitleBar.js"
+import RightBar from "../components/RightBar.js"
 
 export default function Dashboard() {
   const { userInfo, setUserInfo } = useContext(UserContext);
@@ -9,9 +13,15 @@ export default function Dashboard() {
   };
   return (
     <>
-      {/* <TitleBar />
-      <SideBar />
-      <Feed /> */}
+    
+    <TitleBar/>
+    <div style={{display : "flex" , flexDirection : "row" }}>
+    <Sidebar/>
+      <Feed />
+      <RightBar/>
+    </div>
+      
+
     </>
   );
 
