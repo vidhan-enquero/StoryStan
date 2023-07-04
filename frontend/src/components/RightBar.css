@@ -1,0 +1,31 @@
+.right-bar {
+    width: 200px;
+    background-color: red;
+    padding-top: 100px;
+  }
+  
+  .genre-heading {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .genre-button {
+    background-color: red;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .genre-button:hover {
+    background-color: #555;
+  }
+  
