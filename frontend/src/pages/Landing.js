@@ -25,7 +25,7 @@ export default function Landing() {
 
     <>
 
-    <TitleBar />
+    <TitleBar page="landing"/>
     {/* <SideBar/> */}
     <Card style={{margin:"100px"}} >
 

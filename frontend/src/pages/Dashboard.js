@@ -14,7 +14,7 @@ export default function Dashboard() {
   return (
     <>
     
-    <TitleBar/>
+    <TitleBar page="dashboard"/>
     <div style={{display : "flex" , flexDirection : "row" }}>
     <Sidebar/>
       <Feed />
