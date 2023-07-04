@@ -7,19 +7,26 @@ export default function Dashboard() {
   const handleLogout = () => {
     setUserInfo({ isAuthenticated: false });
   };
-
   return (
-    <div>
-      <div>
-        <ul>
-          {Object.keys(userInfo).map((key) => (
-            <li>
-              {key}=={userInfo[key]}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <TitleBar />
+      <SideBar />
+      <Feed />
+    </>
   );
+
+  // return (
+  //   <div>
+  //     <div>
+  //       <ul>
+  //         {Object.keys(userInfo).map((key) => (
+  //           <li>
+  //             {key}=={userInfo[key]}
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //     <button onClick={handleLogout}>Logout</button>
+  //   </div>
+  // );
 }
