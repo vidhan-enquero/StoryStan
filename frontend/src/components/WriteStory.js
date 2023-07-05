@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 const WriteStory = () => {
   const [prompt, setPrompt] = useState("");
   const [genres, setGenres] = useState([]);
   const [response, setResponse] = useState("");
+
+  const { userInfo } = useContext(UserContext);
 
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
@@ -17,22 +20,40 @@ const WriteStory = () => {
     setGenres(selectedGenres);
   };
 
+  const handlePost = () => {
+    fetch("https://us-central1-storystan-5ff27.cloudfunctions.net/postStory", {
+      method: "POST",
+      body: JSON.stringify({ story: response, token: userInfo.accessToken }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+      })
+      .catch((error) => console.error(error));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(prompt, genres);
 
     // Send a request to the server with prompt and genres
     // Replace the API_ENDPOINT with your server endpoint
-    // fetch(API_ENDPOINT, {
-    //   method: "POST",
-    //   body: JSON.stringify({ prompt, genres }),
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => setResponse(data.response))
-    //   .catch((error) => console.error(error));
+    fetch(
+      "https://us-central1-storystan-5ff27.cloudfunctions.net/generateStory",
+      {
+        method: "POST",
+        body: JSON.stringify({ prompt, genres, token: userInfo.accessToken }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => setResponse(data.story))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -80,6 +101,13 @@ const WriteStory = () => {
         <div className="mt-4">
           <h3 className="font-bold">Response:</h3>
           <p>{response}</p>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={handlePost}
+          >
+            Post story!.
+          </button>
         </div>
       )}
     </div>

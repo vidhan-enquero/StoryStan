@@ -4,8 +4,15 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import WriteStory from "../components/WriteStory";
 import Profile from "../components/Profile";
 
+import { auth } from "../config/firebase";
+
+import { signOut } from "firebase/auth";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 const App = () => {
   const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useContext(UserContext);
   return (
     <div>
       {/* Title Bar */}
@@ -33,7 +40,16 @@ const App = () => {
           >
             Write Story
           </button>
-          <button className="mb-4 bg-blue-500 text-white py-2 px-4 rounded">
+          <button
+            className="mb-4 bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={async () => {
+              await signOut(auth);
+              setUserInfo({
+                isAuthenticated: false
+              });
+              navigate("/");
+            }}
+          >
             Logout
           </button>
         </div>
