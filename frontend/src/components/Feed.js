@@ -1,6 +1,5 @@
-
-import './Feed.css'; // Import the CSS file for styling
-import React, { useState, useEffect } from 'react';
+import "./Feed.css"; // Import the CSS file for styling
+import React, { useState, useEffect } from "react";
 
 import {
   collection,
@@ -14,46 +13,33 @@ import {
   updateDoc,
   serverTimestamp,
   getDoc,
-  SnapshotMetadata,
+  SnapshotMetadata
 } from "firebase/firestore";
 import { database as db } from "../config/firebase";
 
-
 const Feed = () => {
-
-
-
-  
-  
   const [err, setErr] = useState(false);
-    const [data, setData] = useState([]);
-  
-    const genstory = async () => {
-      const q = query(
-        collection(db, "story"),
-      );
-  
-      try {
-        const querySnapshot = await getDocs(q);
-        var arr = [];
-        querySnapshot.forEach((doc) => arr.push(doc.data()));
-        setData(arr);
-        console.log(data);
-      }
-      catch (err)
-      {
-        setErr(true);
-      }
-     
-    };
-    useEffect(() => {
-     
-      genstory();
+  const [data, setData] = useState([]);
+
+  const genstory = async () => {
+    const q = query(collection(db, "story"));
+
+    try {
+      const querySnapshot = await getDocs(q);
+      var arr = [];
+      querySnapshot.forEach((doc) => arr.push(doc.data()));
+      setData(arr);
       console.log(data);
-    }, []); 
+    } catch (err) {
+      setErr(true);
+    }
+  };
+  useEffect(() => {
+    genstory();
+    console.log(data);
+  }, []);
 
   return (
-    
     <div className="card-list">
       {data.map((sam, index) => (
         <div className="card" key={index}>

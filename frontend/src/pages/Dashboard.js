@@ -9,30 +9,30 @@ import { httpsCallable } from "firebase/functions";
 import { UserContext } from "../context/UserContext.js";
 
 export default function Dashboard() {
-  const { userInfo } = useContext(UserContext);
+  // const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      // const verifyUser = httpsCallable(functions, "verifyUser");
-      const response = await fetch(
-        "https://us-central1-storystan-5ff27.cloudfunctions.net/verifyUser",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            token: userInfo.accessToken
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
-      if (response.status === 200) {
-        alert("Successfully verified the user");
-      } else {
-        alert("Not verified");
-      }
-    };
-    fetchData();
+    // const fetchData = async () => {
+    //   // const verifyUser = httpsCallable(functions, "verifyUser");
+    //   const response = await fetch(
+    //     "https://us-central1-storystan-5ff27.cloudfunctions.net/verifyUser",
+    //     {
+    //       method: "POST",
+    //       body: JSON.stringify({
+    //         token: userInfo.accessToken
+    //       }),
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       }
+    //     }
+    //   );
+    //   if (response.status === 200) {
+    //     alert("Successfully verified the user");
+    //   } else {
+    //     alert("Not verified");
+    //   }
+    // };
+    // fetchData();
   });
 
   return (
@@ -45,19 +45,4 @@ export default function Dashboard() {
       </div>
     </>
   );
-
-  // return (
-  //   <div>
-  //     <div>
-  //       <ul>
-  //         {Object.keys(userInfo).map((key) => (
-  //           <li>
-  //             {key}=={userInfo[key]}
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //     <button onClick={handleLogout}>Logout</button>
-  //   </div>
-  // );
 }
